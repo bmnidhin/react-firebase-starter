@@ -16,7 +16,8 @@ import LoginPage from "./pages/auth/LoginPage";
 import AllUsers from "./pages/user/AllUsers";
 import ManageUser from "./components/users/ManageUser";
 import NewUser from "./components/users/NewUser";
-
+import AccessDenied from "./pages/auth/AccessDenied";
+import NotFound from "./pages/NotFound";
 
 export default function App(props) {
   const [currentUser, setcurretUser] = useState(null);
@@ -45,17 +46,25 @@ export default function App(props) {
         <div>
           <NavBar currentUser={currentUser} />
           <Switch>
-            <Route exact path="/" component={Dashboard}/>
-             
-            <Route exact path="/login" component={LoginPage}/>
-           
-            <Route exact path="/users" component={AllUsers}/>
+            {currentUser ? (
+              <div>
+                <Route exact path="/" component={Dashboard} />
 
-            <Route exact path="/create-user" component={NewUser}/>
-           
-            <Route exact path="/users/:id" component={ManageUser}/>
-            
-           
+                <Route exact path="/login" component={LoginPage} />
+
+                <Route exact path="/users" component={AllUsers} />
+
+                <Route exact path="/create-user" component={NewUser} />
+
+                <Route exact path="/users/:id" component={ManageUser} />
+              </div>
+            ) : (
+              <div>
+                <Route exact path="/" component={AccessDenied} />
+                <Route exact path="/login" component={LoginPage} />
+                
+              </div>
+            )}
           </Switch>
         </div>
       </Router>
