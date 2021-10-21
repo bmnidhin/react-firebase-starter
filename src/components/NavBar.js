@@ -28,7 +28,7 @@ export default function NavBar(props) {
       
       </ul>
       {`Hi ${props.currentUser ? props.currentUser?.email: 'No User'}`}
-      <button onClick={logout}>Logout</button>
+     {props.currentUser && <button onClick={logout}>Logout</button>}
     </div>
   );
 }
